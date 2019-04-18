@@ -8,9 +8,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createHistory as history } from 'history';
 
 import '../assets/stylesheets/application.scss';
+import postsReducer from './reducers/posts_reducer'
+
+import PostsIndex from './containers/posts_index';
 
 const reducers = combineReducers({
-  // key: reducer
+  posts: postsReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
@@ -19,9 +22,11 @@ const middlewares = applyMiddleware(reduxPromise, logger);
 ReactDOM.render(
   <Provider store={createStore(reducers, {}, middlewares)}>
     <Router history={history}>
-      <Switch>
-        TODO
-      </Switch>
+      <div className="thin-container">
+        <Switch>
+          <Route path="/" exact component={PostsIndex} />
+        </Switch>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root')
